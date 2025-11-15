@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Physics Formulas Ch.1-19</title>
+    <link href="https://fonts.googleapis.com/css2?family=OpenDyslexic&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:13px;line-height:1.4;color:#3d3428;background:#faf8f3;transition:all .3s}
+
+        /* Default Theme (Earthy) */
+        body{--bg:#faf8f3;--fg:#3d3428;--hdr-bg1:#3d3428;--hdr-bg2:#6b5d4f;--hdr-fg:#f4f1ea;--border:#e8dfd0;--hover:#f4f1ea;--accent:#a67c52;--formula-bg:#faf8f3;--formula-border:#8b9b7e;--fn-bg:rgba(139,155,126,.08);--fn-fg:#8b9b7e;--hl-bg:#fff9e6;--hl-border:#a67c52}
+
+        /* Read Theme (Dyslexic-friendly) */
+        body.read{font-family:'OpenDyslexic',sans-serif;--bg:#f5f3ed;--fg:#2d2d2d;--hdr-bg1:#4a4a4a;--hdr-bg2:#5a5a5a;--hdr-fg:#f5f3ed;--border:#d0cec8;--hover:#e8e6e0;--accent:#7a6f5d;--formula-bg:#f9f8f5;--formula-border:#9b8e7e;--fn-bg:rgba(122,111,93,.1);--fn-fg:#7a6f5d;--hl-bg:#fffacd;--hl-border:#d4a574}
+
+        /* Dark Theme (Monokai-inspired) */
+        body.dark{--bg:#272822;--fg:#f8f8f2;--hdr-bg1:#1e1f1c;--hdr-bg2:#2d2e27;--hdr-fg:#f8f8f2;--border:#3e3d32;--hover:#3e3d32;--accent:#e6db74;--formula-bg:#2d2e27;--formula-border:#66d9ef;--fn-bg:rgba(166,226,46,.15);--fn-fg:#a6e22e;--hl-bg:#49483e;--hl-border:#f92672}
+
+        /* Dracula Theme */
+        body.dracula{--bg:#282a36;--fg:#f8f8f2;--hdr-bg1:#21222c;--hdr-bg2:#2c2d3a;--hdr-fg:#f8f8f2;--border:#44475a;--hover:#44475a;--accent:#ff79c6;--formula-bg:#2c2d3a;--formula-border:#8be9fd;--fn-bg:rgba(139,233,253,.15);--fn-fg:#8be9fd;--hl-bg:#44475a;--hl-border:#ff79c6}
+
+        /* Nord Theme */
+        body.nord{--bg:#2e3440;--fg:#eceff4;--hdr-bg1:#242933;--hdr-bg2:#2e3440;--hdr-fg:#eceff4;--border:#3b4252;--hover:#3b4252;--accent:#88c0d0;--formula-bg:#3b4252;--formula-border:#81a1c1;--fn-bg:rgba(136,192,208,.15);--fn-fg:#88c0d0;--hl-bg:#434c5e;--hl-border:#a3be8c}
+
+        /* Solarized Light */
+        body.solarized-light{--bg:#fdf6e3;--fg:#657b83;--hdr-bg1:#eee8d5;--hdr-bg2:#e3dcc3;--hdr-fg:#586e75;--border:#eee8d5;--hover:#eee8d5;--accent:#268bd2;--formula-bg:#eee8d5;--formula-border:#859900;--fn-bg:rgba(38,139,210,.1);--fn-fg:#268bd2;--hl-bg:#ece3c8;--hl-border:#cb4b16}
+
+        /* Gruvbox Dark */
+        body.gruvbox{--bg:#282828;--fg:#ebdbb2;--hdr-bg1:#1d2021;--hdr-bg2:#282828;--hdr-fg:#ebdbb2;--border:#3c3836;--hover:#3c3836;--accent:#fabd2f;--formula-bg:#3c3836;--formula-border:#b8bb26;--fn-bg:rgba(184,187,38,.15);--fn-fg:#b8bb26;--hl-bg:#504945;--hl-border:#fe8019}
+
+        /* Ocean Theme */
+        body.ocean{--bg:#1b2b34;--fg:#c0c5ce;--hdr-bg1:#0f1419;--hdr-bg2:#1b2b34;--hdr-fg:#c0c5ce;--border:#343d46;--hover:#343d46;--accent:#6699cc;--formula-bg:#343d46;--formula-border:#5fb3b3;--fn-bg:rgba(95,179,179,.15);--fn-fg:#5fb3b3;--hl-bg:#4f5b66;--hl-border:#ec5f67}
+
+        /* Synthwave Theme */
+        body.synthwave{--bg:#262335;--fg:#f92aad;--hdr-bg1:#1c1826;--hdr-bg2:#241b2f;--hdr-fg:#fede5d;--border:#382c4a;--hover:#382c4a;--accent:#fede5d;--formula-bg:#2d2437;--formula-border:#36f9f6;--fn-bg:rgba(54,249,246,.15);--fn-fg:#36f9f6;--hl-bg:#382c4a;--hl-border:#f92aad}
+
+        body{background:var(--bg);color:var(--fg)}
+        .c{max-width:1400px;margin:0 auto;background:var(--bg);min-height:100vh;border-left:1px solid var(--border);border-right:1px solid var(--border)}
+        .h{background:linear-gradient(135deg,var(--hdr-bg1),var(--hdr-bg2));color:var(--hdr-fg);padding:8px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+        .h h1{font-size:16px;font-weight:600}
+        .h p{font-size:11px;opacity:.85;margin-top:2px}
+        .theme-selector{display:flex;gap:4px;align-items:center}
+        .theme-label{font-size:10px;color:var(--hdr-fg);opacity:.8;margin-right:4px}
+        .theme-btn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:var(--hdr-fg);padding:4px 8px;font-size:10px;cursor:pointer;border-radius:3px;transition:.2s}
+        .theme-btn:hover,.theme-btn.active{background:rgba(255,255,255,.25);border-color:rgba(255,255,255,.5)}
+        .s{padding:10px 16px;background:var(--bg);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 2px 4px rgba(0,0,0,.1)}
+        #si{width:100%;padding:5px 8px;border:1px solid var(--border);font-size:12px;outline:none;border-radius:3px;transition:.2s;background:var(--bg);color:var(--fg)}
+        #si:focus{border-color:var(--accent)}
+        .ss{font-size:10px;color:var(--fg);opacity:.6;margin-top:4px;text-align:center}
+        .cn{padding:16px}
+        .bg{display:flex;gap:5px;margin-bottom:10px;flex-wrap:wrap}
+        .b{padding:4px 10px;border:1px solid var(--accent);background:var(--bg);color:var(--accent);cursor:pointer;font-size:11px;font-weight:500;transition:.2s;border-radius:3px}
+        .b:hover{background:var(--accent);color:var(--bg)}
+        .ch{margin-bottom:8px;border:1px solid var(--border);border-radius:4px;overflow:hidden}
+        .chh{padding:6px 12px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:var(--bg);user-select:none;transition:.2s}
+        .chh:hover{background:var(--hover)}
+        .chh h2{font-size:13px;font-weight:600;color:var(--fg)}
+        .t{font-size:14px;transition:transform .3s;color:var(--fg);opacity:.7}
+        .ch.a .t{transform:rotate(45deg)}
+        .chc{max-height:0;overflow:hidden;transition:max-height .3s}
+        .ch.a .chc{max-height:50000px}
+        .chb{padding:10px;column-count:2;column-gap:16px;column-rule:1px solid var(--border)}
+        .fb{background:var(--formula-bg);border-left:2px solid var(--formula-border);padding:4px 6px;margin:3px 0;font-size:12px;line-height:1.4;break-inside:avoid;border-radius:2px;transition:.2s}
+        .fb:hover{opacity:.9;transform:translateX(2px)}
+        .fb.hl{background:var(--hl-bg);border-left-color:var(--hl-border);box-shadow:0 0 0 2px var(--hl-border)}
+        .fn{color:var(--fn-fg);font-weight:600;font-size:10px;display:inline-block;min-width:50px;background:var(--fn-bg);padding:1px 5px;border-radius:2px;margin-right:5px}
+        .f{color:var(--fg);font-weight:600;font-size:13px}
+        .d{color:var(--fg);opacity:.6;font-size:10px;margin-top:1px}
+        sub,sup{font-size:.7em}
+        @media print{.s,.bg,.theme-selector{display:none}.ch.a .chc{max-height:none}.chb{column-count:2}}
+        @media(max-width:1024px){.chb{column-count:1}}
+        @media(max-width:768px){.h{flex-direction:column;align-items:flex-start}.chb{column-count:1}.theme-selector{width:100%}.theme-btn{flex:1}}
+    </style>
+</head>
+<body>
+<div class="c">
+    <div class="h">
+        <div>
+            <h1>Physics Formulas Ch.1-19</h1>
+            <p>Complete Reference</p>
+        </div>
+        <div class="theme-selector">
+            <span class="theme-label">Theme:</span>
+            <button class="theme-btn active" onclick="setTheme('')">Earthy</button>
+            <button class="theme-btn" onclick="setTheme('read')">Read</button>
+            <button class="theme-btn" onclick="setTheme('dark')">Dark</button>
+            <button class="theme-btn" onclick="setTheme('dracula')">Dracula</button>
+            <button class="theme-btn" onclick="setTheme('nord')">Nord</button>
+            <button class="theme-btn" onclick="setTheme('solarized-light')">Solarized</button>
+            <button class="theme-btn" onclick="setTheme('gruvbox')">Gruvbox</button>
+            <button class="theme-btn" onclick="setTheme('ocean')">Ocean</button>
+            <button class="theme-btn" onclick="setTheme('synthwave')">Synthwave</button>
+        </div>
+    </div>
+    <div class="s"><input type="text" id="si" placeholder="Search..."><div class="ss" id="ss"></div></div>
+    <div class="cn">
+        <div class="bg"><button class="b" onclick="document.querySelectorAll('.ch').forEach(c=>c.classList.add('a'))">Expand All</button><button class="b" onclick="document.querySelectorAll('.ch').forEach(c=>c.classList.remove('a'))">Collapse All</button><button class="b" onclick="window.print()">Print</button></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.1: Doing Physics</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">Prob.69</span><div class="f">V = (4/3)πr³</div><div class="d">Volume of Sphere</div></div>
+        </div></div></div>
+
+        <div style="background:var(--accent);color:var(--bg);padding:8px 16px;margin:20px 0 10px;font-weight:700;font-size:14px;border-radius:4px;text-align:center">PART ONE: MECHANICS</div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.2: Motion in Straight Line</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(2.1)</span><div class="f">v̄ = Δx / Δt</div><div class="d">Average Velocity</div></div>
+            <div class="fb"><span class="fn">(2.2b)</span><div class="f">v = dx / dt</div><div class="d">Instantaneous Velocity</div></div>
+            <div class="fb"><span class="fn">Tact.2.1</span><div class="f">dx/dt = nbt<sup>n−1</sup></div><div class="d">Derivative of Power (x=bt<sup>n</sup>)</div></div>
+            <div class="fb"><span class="fn">(2.4)</span><div class="f">ā = Δv / Δt</div><div class="d">Average Acceleration</div></div>
+            <div class="fb"><span class="fn">(2.5)</span><div class="f">a = dv / dt</div><div class="d">Instantaneous Acceleration</div></div>
+            <div class="fb"><span class="fn">(2.6)</span><div class="f">a = d²x / dt²</div><div class="d">Accel. as 2nd Derivative</div></div>
+            <div class="fb"><span class="fn">(2.7)</span><div class="f">v = v₀ + at</div><div class="d">Velocity (Const. Accel.)</div></div>
+            <div class="fb"><span class="fn">(2.8)</span><div class="f">v̄ = ½(v₀ + v)</div><div class="d">Avg Velocity (Const. Accel.)</div></div>
+            <div class="fb"><span class="fn">(2.9)</span><div class="f">x = x₀ + ½(v₀ + v)t</div><div class="d">Position (Const. Accel.)</div></div>
+            <div class="fb"><span class="fn">(2.10)</span><div class="f">x = x₀ + v₀t + ½at²</div><div class="d">Position vs Time</div></div>
+            <div class="fb"><span class="fn">(2.11)</span><div class="f">v² = v₀² + 2a(x − x₀)</div><div class="d">Velocity vs Position</div></div>
+            <div class="fb"><span class="fn">(2.12)</span><div class="f">v(t) = ∫a(t) dt</div><div class="d">Velocity from Accel.</div></div>
+            <div class="fb"><span class="fn">(2.13)</span><div class="f">x(t) = ∫v(t) dt</div><div class="d">Position from Velocity</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.3: Motion in 2D/3D</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(3.1)</span><div class="f">A = √(A<sub>x</sub>² + A<sub>y</sub>²) ; tan(θ) = A<sub>y</sub>/A<sub>x</sub></div><div class="d">Vector Mag. & Direction</div></div>
+            <div class="fb"><span class="fn">(3.2)</span><div class="f">A<sub>x</sub> = A cos(θ) ; A<sub>y</sub> = A sin(θ)</div><div class="d">Vector Components</div></div>
+            <div class="fb"><span class="fn">(3.3)</span><div class="f"><b>v̄</b> = Δ<b>r</b> / Δt</div><div class="d">Avg Velocity Vector</div></div>
+            <div class="fb"><span class="fn">(3.4)</span><div class="f"><b>v</b> = d<b>r</b> / dt</div><div class="d">Inst. Velocity Vector</div></div>
+            <div class="fb"><span class="fn">(3.5)</span><div class="f"><b>ā</b> = Δ<b>v</b> / Δt</div><div class="d">Avg Accel. Vector</div></div>
+            <div class="fb"><span class="fn">(3.6)</span><div class="f"><b>a</b> = d<b>v</b> / dt</div><div class="d">Inst. Accel. Vector</div></div>
+            <div class="fb"><span class="fn">(3.7)</span><div class="f"><b>v</b> = <b>v'</b> + <b>V</b></div><div class="d">Relative Velocity</div></div>
+            <div class="fb"><span class="fn">(3.8)</span><div class="f"><b>v</b> = <b>v₀</b> + <b>a</b>t</div><div class="d">Velocity Vector (Const. Accel.)</div></div>
+            <div class="fb"><span class="fn">(3.9)</span><div class="f"><b>r</b> = <b>r₀</b> + <b>v₀</b>t + ½<b>a</b>t²</div><div class="d">Position Vector (Const. Accel.)</div></div>
+            <div class="fb"><span class="fn">(3.10-13)</span><div class="f">v<sub>x</sub>=v<sub>x0</sub> ; v<sub>y</sub>=v<sub>y0</sub>−gt ; x=x₀+v<sub>x0</sub>t ; y=y₀+v<sub>y0</sub>t−½gt²</div><div class="d">Projectile Motion Eqs</div></div>
+            <div class="fb"><span class="fn">(3.14)</span><div class="f">y = x tan(θ₀) − [g/(2v₀²cos²θ₀)]x²</div><div class="d">Projectile Trajectory</div></div>
+            <div class="fb"><span class="fn">(3.15)</span><div class="f">x = (v₀²/g) sin(2θ₀)</div><div class="d">Horizontal Range</div></div>
+            <div class="fb"><span class="fn">(3.16)</span><div class="f">a = v² / r</div><div class="d">Centripetal Accel.</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.4: Force & Motion</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(4.1)</span><div class="f"><b>p</b> = m<b>v</b></div><div class="d">Momentum</div></div>
+            <div class="fb"><span class="fn">(4.2)</span><div class="f"><b>F</b><sub>net</sub> = d<b>p</b> / dt</div><div class="d">Newton 2nd Law (General)</div></div>
+            <div class="fb"><span class="fn">(4.3)</span><div class="f"><b>F</b><sub>net</sub> = m<b>a</b></div><div class="d">Newton 2nd Law (Const. Mass)</div></div>
+            <div class="fb"><span class="fn">(4.4)</span><div class="f">m<sub>unk</sub>/m<sub>known</sub> = a<sub>known</sub>/a<sub>unk</sub></div><div class="d">Operational Def. of Mass</div></div>
+            <div class="fb"><span class="fn">(4.5)</span><div class="f"><b>w</b> = m<b>g</b></div><div class="d">Weight</div></div>
+            <div class="fb"><span class="fn">(4.9)</span><div class="f">F<sub>s</sub> = −kx</div><div class="d">Hooke's Law</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.5: Using Newton's Laws</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(5.1)</span><div class="f">F<sub>net</sub> = mv²/r</div><div class="d">Net Force (Circular Motion)</div></div>
+            <div class="fb"><span class="fn">(5.2)</span><div class="f">f<sub>s</sub> ≤ µ<sub>s</sub>n</div><div class="d">Static Friction</div></div>
+            <div class="fb"><span class="fn">(5.3)</span><div class="f">f<sub>k</sub> = µ<sub>k</sub>n</div><div class="d">Kinetic Friction</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.6: Energy, Work, Power</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(6.1)</span><div class="f">W = F<sub>x</sub>Δx</div><div class="d">Work (Const. Force, 1D)</div></div>
+            <div class="fb"><span class="fn">(6.2)</span><div class="f">W = FΔr cos(θ)</div><div class="d">Work (Magnitudes)</div></div>
+            <div class="fb"><span class="fn">(6.3)</span><div class="f"><b>A</b> · <b>B</b> = AB cos(θ)</div><div class="d">Dot Product</div></div>
+            <div class="fb"><span class="fn">(6.4)</span><div class="f"><b>A</b> · <b>B</b> = A<sub>x</sub>B<sub>x</sub> + A<sub>y</sub>B<sub>y</sub> + A<sub>z</sub>B<sub>z</sub></div><div class="d">Dot Product (Components)</div></div>
+            <div class="fb"><span class="fn">(6.5)</span><div class="f">W = <b>F</b> · Δ<b>r</b></div><div class="d">Work (Scalar Product)</div></div>
+            <div class="fb"><span class="fn">(6.8)</span><div class="f">W = ∫ F(x) dx</div><div class="d">Work (Varying Force)</div></div>
+            <div class="fb"><span class="fn">(6.10)</span><div class="f">W = ½kx²</div><div class="d">Work on Spring</div></div>
+            <div class="fb"><span class="fn">(6.11)</span><div class="f">W = ∫ <b>F</b> · d<b>r</b></div><div class="d">Work (Line Integral)</div></div>
+            <div class="fb"><span class="fn">(6.12)</span><div class="f">W<sub>net</sub> = ½mv₂² − ½mv₁²</div><div class="d">Work-KE Theorem (Integral)</div></div>
+            <div class="fb"><span class="fn">(6.13)</span><div class="f">K = ½mv²</div><div class="d">Kinetic Energy</div></div>
+            <div class="fb"><span class="fn">(6.14)</span><div class="f">ΔK = W<sub>net</sub></div><div class="d">Work-KE Theorem</div></div>
+            <div class="fb"><span class="fn">(6.15)</span><div class="f">P̄ = ΔW / Δt</div><div class="d">Average Power</div></div>
+            <div class="fb"><span class="fn">(6.16)</span><div class="f">P = dW / dt</div><div class="d">Instantaneous Power</div></div>
+            <div class="fb"><span class="fn">(6.17)</span><div class="f">W = PΔt</div><div class="d">Work (Const. Power)</div></div>
+            <div class="fb"><span class="fn">(6.18)</span><div class="f">W = ∫ P dt</div><div class="d">Work (Integral of Power)</div></div>
+            <div class="fb"><span class="fn">(6.19)</span><div class="f">P = <b>F</b> · <b>v</b></div><div class="d">Power (Force & Velocity)</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.7: Conservation of Energy</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(7.1)</span><div class="f">∮ <b>F</b> · d<b>r</b> = 0</div><div class="d">Conservative Force Def.</div></div>
+            <div class="fb"><span class="fn">(7.2)</span><div class="f">ΔU<sub>AB</sub> = −∫ <b>F</b> · d<b>r</b></div><div class="d">Potential Energy Change</div></div>
+            <div class="fb"><span class="fn">(7.2a)</span><div class="f">ΔU = −∫ F(x) dx</div><div class="d">PE Change (1D)</div></div>
+            <div class="fb"><span class="fn">(7.2b)</span><div class="f">ΔU = −F(x₂ − x₁)</div><div class="d">PE Change (Const. Force)</div></div>
+            <div class="fb"><span class="fn">(7.3)</span><div class="f">ΔU = mgΔy</div><div class="d">Gravitational PE Change</div></div>
+            <div class="fb"><span class="fn">(7.4)</span><div class="f">U = ½kx²</div><div class="d">Elastic PE (U=0 at x=0)</div></div>
+            <div class="fb"><span class="fn">(7.5)</span><div class="f">ΔK + ΔU = 0</div><div class="d">Mech. Energy Conserv. (Change)</div></div>
+            <div class="fb"><span class="fn">(7.6)</span><div class="f">K + U = const. = K₀ + U₀</div><div class="d">Mech. Energy Conserv. (Total)</div></div>
+            <div class="fb"><span class="fn">(7.7)</span><div class="f">ΔK + ΔU = −f<sub>k</sub>d</div><div class="d">Energy (Noncons. Forces)</div></div>
+            <div class="fb"><span class="fn">(7.8)</span><div class="f">ΔK + ΔU + ΔE<sub>int</sub> = W<sub>ext</sub></div><div class="d">General Energy Conserv.</div></div>
+            <div class="fb"><span class="fn">(7.9)</span><div class="f">F<sub>x</sub> = −dU / dx</div><div class="d">Force from PE (1D)</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.8: Gravity</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(8.1)</span><div class="f">F = Gm₁m₂ / r²</div><div class="d">Universal Gravitation</div></div>
+            <div class="fb"><span class="fn">(8.2)</span><div class="f">a = GM / r²</div><div class="d">Gravitational Accel.</div></div>
+            <div class="fb"><span class="fn">(8.3)</span><div class="f">v = √(GM / r)</div><div class="d">Speed (Circular Orbit)</div></div>
+            <div class="fb"><span class="fn">(8.4)</span><div class="f">T² = (4π²r³) / GM</div><div class="d">Period (Circular Orbit)</div></div>
+            <div class="fb"><span class="fn">(8.5)</span><div class="f">ΔU₁₂ = GMm(1/r₁ − 1/r₂)</div><div class="d">Grav. PE Change</div></div>
+            <div class="fb"><span class="fn">(8.6)</span><div class="f">U(r) = −GMm / r</div><div class="d">Grav. PE (U=0 at ∞)</div></div>
+            <div class="fb"><span class="fn">(8.7)</span><div class="f">v<sub>esc</sub> = √(2GM / r)</div><div class="d">Escape Speed</div></div>
+            <div class="fb"><span class="fn">(8.8a,b)</span><div class="f">E = −K ; E = ½U = −GMm/2r</div><div class="d">Total Energy (Circular Orbit)</div></div>
+            <div class="fb"><span class="fn">(8.9)</span><div class="f"><b>g</b> = −g<b>ĵ</b></div><div class="d">Grav. Field (Earth Surface)</div></div>
+            <div class="fb"><span class="fn">(8.10)</span><div class="f"><b>g</b> = −(GM/r²)<b>r̂</b></div><div class="d">Grav. Field (Spherical Mass)</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.9: Systems of Particles</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(9.2)</span><div class="f"><b>r</b><sub>cm</sub> = (Σm<sub>i</sub><b>r</b><sub>i</sub>) / M</div><div class="d">Center of Mass (Discrete)</div></div>
+            <div class="fb"><span class="fn">(9.3)</span><div class="f"><b>F</b><sub>net,ext</sub> = M<b>a</b><sub>cm</sub></div><div class="d">Newton 2nd Law (System)</div></div>
+            <div class="fb"><span class="fn">(9.4)</span><div class="f"><b>r</b><sub>cm</sub> = (1/M) ∫ <b>r</b> dm</div><div class="d">Center of Mass (Continuous)</div></div>
+            <div class="fb"><span class="fn">(9.5)</span><div class="f"><b>P</b> = M<b>v</b><sub>cm</sub></div><div class="d">Total Momentum</div></div>
+            <div class="fb"><span class="fn">(9.6)</span><div class="f"><b>F</b><sub>net,ext</sub> = d<b>P</b> / dt</div><div class="d">Newton 2nd (Momentum)</div></div>
+            <div class="fb"><span class="fn">(9.7)</span><div class="f"><b>P</b> = constant</div><div class="d">Momentum Conservation</div></div>
+            <div class="fb"><span class="fn">(9.9)</span><div class="f">K = K<sub>cm</sub> + K<sub>int</sub></div><div class="d">KE of System</div></div>
+            <div class="fb"><span class="fn">(9.10b)</span><div class="f"><b>J</b> = ∫ <b>F</b>(t) dt = Δ<b>p</b></div><div class="d">Impulse</div></div>
+            <div class="fb"><span class="fn">(9.11)</span><div class="f">m₁<b>v</b>₁ + m₂<b>v</b>₂ = (m₁+m₂)<b>v</b><sub>f</sub></div><div class="d">Totally Inelastic Collision</div></div>
+            <div class="fb"><span class="fn">(9.12)</span><div class="f">m₁<b>v</b>₁<sub>i</sub> + m₂<b>v</b>₂<sub>i</sub> = m₁<b>v</b>₁<sub>f</sub> + m₂<b>v</b>₂<sub>f</sub></div><div class="d">Momentum Cons. (Elastic)</div></div>
+            <div class="fb"><span class="fn">(9.13)</span><div class="f">½m₁v₁<sub>i</sub>² + ½m₂v₂<sub>i</sub>² = ½m₁v₁<sub>f</sub>² + ½m₂v₂<sub>f</sub>²</div><div class="d">Energy Cons. (Elastic)</div></div>
+            <div class="fb"><span class="fn">(9.14)</span><div class="f">v₁<sub>i</sub> − v₂<sub>i</sub> = v₂<sub>f</sub> − v₁<sub>f</sub></div><div class="d">Rel. Velocity (1D Elastic)</div></div>
+            <div class="fb"><span class="fn">(9.15a)</span><div class="f">v₁<sub>f</sub> = [(m₁−m₂)/(m₁+m₂)]v₁<sub>i</sub> + [2m₂/(m₁+m₂)]v₂<sub>i</sub></div><div class="d">Final v₁ (1D Elastic)</div></div>
+            <div class="fb"><span class="fn">(9.15b)</span><div class="f">v₂<sub>f</sub> = [2m₁/(m₁+m₂)]v₁<sub>i</sub> + [(m₂−m₁)/(m₁+m₂)]v₂<sub>i</sub></div><div class="d">Final v₂ (1D Elastic)</div></div>
+            <div class="fb"><span class="fn">(9.16)</span><div class="f">K₂/K₁ = 4m₁m₂/(m₁+m₂)²</div><div class="d">Frac. KE Transfer (1D Elastic)</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.10: Rotational Motion</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(10.1)</span><div class="f">ω̄ = Δθ / Δt</div><div class="d">Avg Angular Velocity</div></div>
+            <div class="fb"><span class="fn">(10.2)</span><div class="f">ω = dθ / dt</div><div class="d">Inst. Angular Velocity</div></div>
+            <div class="fb"><span class="fn">(10.3)</span><div class="f">v = ωr</div><div class="d">Tangential Speed</div></div>
+            <div class="fb"><span class="fn">(10.4)</span><div class="f">α = dω / dt</div><div class="d">Angular Accel.</div></div>
+            <div class="fb"><span class="fn">(10.5)</span><div class="f">a<sub>t</sub> = rα</div><div class="d">Tangential Accel.</div></div>
+            <div class="fb"><span class="fn">(10.7-9)</span><div class="f">ω=ω₀+αt ; θ=θ₀+ω₀t+½αt² ; ω²=ω₀²+2α(θ−θ₀)</div><div class="d">Const. Angular Accel.</div></div>
+            <div class="fb"><span class="fn">(10.10)</span><div class="f">τ = rF sin(θ)</div><div class="d">Torque Magnitude</div></div>
+            <div class="fb"><span class="fn">(10.11)</span><div class="f">τ = Iα</div><div class="d">Rotational Newton 2nd Law</div></div>
+            <div class="fb"><span class="fn">(10.12)</span><div class="f">I = Σm<sub>i</sub>r<sub>i</sub>²</div><div class="d">Rotational Inertia (Discrete)</div></div>
+            <div class="fb"><span class="fn">(10.13)</span><div class="f">I = ∫ r² dm</div><div class="d">Rotational Inertia (Continuous)</div></div>
+            <div class="fb"><span class="fn">(10.17)</span><div class="f">I = I<sub>cm</sub> + Md²</div><div class="d">Parallel-Axis Theorem</div></div>
+            <div class="fb"><span class="fn">(10.18)</span><div class="f">K<sub>rot</sub> = ½Iω²</div><div class="d">Rotational KE</div></div>
+            <div class="fb"><span class="fn">(10.19)</span><div class="f">W = ∫ τ dθ = ΔK<sub>rot</sub></div><div class="d">Work-KE Theorem (Rotational)</div></div>
+            <div class="fb"><span class="fn">(10.20)</span><div class="f">K<sub>total</sub> = ½Mv² + ½I<sub>cm</sub>ω²</div><div class="d">Total KE (Rolling)</div></div>
+            <div class="fb"><span class="fn">(10.21)</span><div class="f">v = ωR</div><div class="d">Rolling (No Slipping)</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.11: Rotational Vectors & Angular Momentum</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(11.1)</span><div class="f"><b>α</b> = d<b>ω</b> / dt</div><div class="d">Angular Accel. Vector</div></div>
+            <div class="fb"><span class="fn">(11.2)</span><div class="f"><b>τ</b> = <b>r</b> × <b>F</b></div><div class="d">Torque Vector</div></div>
+            <div class="fb"><span class="fn">(11.3)</span><div class="f"><b>L</b> = <b>r</b> × <b>p</b></div><div class="d">Angular Momentum (Particle)</div></div>
+            <div class="fb"><span class="fn">(11.4)</span><div class="f"><b>L</b> = I<b>ω</b></div><div class="d">Angular Momentum (Rigid Body)</div></div>
+            <div class="fb"><span class="fn">(11.5)</span><div class="f">d<b>L</b> / dt = <b>τ</b></div><div class="d">Rotational Newton 2nd (Angular Mom.)</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.12: Static Equilibrium</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(12.1)</span><div class="f">Σ<b>F</b><sub>i</sub> = 0</div><div class="d">Force Balance</div></div>
+            <div class="fb"><span class="fn">(12.2)</span><div class="f">Σ<b>τ</b><sub>i</sub> = Σ(<b>r</b><sub>i</sub> × <b>F</b><sub>i</sub>) = 0</div><div class="d">Torque Balance</div></div>
+            <div class="fb"><span class="fn">(12.3)</span><div class="f">dU/dx = 0</div><div class="d">Equilibrium (from PE)</div></div>
+            <div class="fb"><span class="fn">(12.4)</span><div class="f">d²U/dx² > 0</div><div class="d">Stable Equilibrium</div></div>
+            <div class="fb"><span class="fn">(12.5)</span><div class="f">d²U/dx² < 0</div><div class="d">Unstable Equilibrium</div></div>
+        </div></div></div>
+
+        <div style="background:var(--accent);color:var(--bg);padding:8px 16px;margin:20px 0 10px;font-weight:700;font-size:14px;border-radius:4px;text-align:center">PART TWO: OSCILLATIONS, WAVES, AND FLUIDS</div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.13: Oscillatory Motion</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(13.1)</span><div class="f">f = 1 / T</div><div class="d">Frequency & Period</div></div>
+            <div class="fb"><span class="fn">(13.2)</span><div class="f">F = −kx</div><div class="d">Restoring Force (SHM)</div></div>
+            <div class="fb"><span class="fn">(13.3)</span><div class="f">m(d²x/dt²) = −kx</div><div class="d">Newton 2nd (SHM)</div></div>
+            <div class="fb"><span class="fn">(13.4)</span><div class="f">x(t) = A cos(ωt)</div><div class="d">Position (SHM from max)</div></div>
+            <div class="fb"><span class="fn">(13.5)</span><div class="f">T = 2π / ω</div><div class="d">Period & Angular Freq.</div></div>
+            <div class="fb"><span class="fn">(13.6)</span><div class="f">f = ω / 2π</div><div class="d">Frequency & Angular Freq.</div></div>
+            <div class="fb"><span class="fn">(13.7a)</span><div class="f">ω = √(k/m)</div><div class="d">Angular Freq. (Mass-Spring)</div></div>
+            <div class="fb"><span class="fn">(13.7b,c)</span><div class="f">f = (1/2π)√(k/m) ; T = 2π√(m/k)</div><div class="d">Freq. & Period (Mass-Spring)</div></div>
+            <div class="fb"><span class="fn">(13.8)</span><div class="f">x(t) = A cos(ωt + φ)</div><div class="d">Position (SHM General)</div></div>
+            <div class="fb"><span class="fn">(13.9)</span><div class="f">v(t) = −ωA sin(ωt)</div><div class="d">Velocity (SHM)</div></div>
+            <div class="fb"><span class="fn">(13.10)</span><div class="f">a(t) = −ω²A cos(ωt)</div><div class="d">Accel. (SHM)</div></div>
+            <div class="fb"><span class="fn">(13.11)</span><div class="f">I(d²θ/dt²) = −κθ</div><div class="d">Torsional Oscillator</div></div>
+            <div class="fb"><span class="fn">(13.12)</span><div class="f">ω = √(κ/I)</div><div class="d">Angular Freq. (Torsional)</div></div>
+            <div class="fb"><span class="fn">(13.13)</span><div class="f">ω = √(mgL/I)</div><div class="d">Angular Freq. (Physical Pendulum)</div></div>
+            <div class="fb"><span class="fn">(13.14)</span><div class="f">ω = √(g/L)</div><div class="d">Angular Freq. (Simple Pendulum)</div></div>
+            <div class="fb"><span class="fn">(13.15)</span><div class="f">T = 2π√(L/g)</div><div class="d">Period (Simple Pendulum)</div></div>
+            <div class="fb"><span class="fn">(13.17)</span><div class="f">x(t) = Ae<sup>−bt/2m</sup> cos(ωt + φ)</div><div class="d">Position (Damped)</div></div>
+            <div class="fb"><span class="fn">(13.19)</span><div class="f">A(ω<sub>d</sub>) = F<sub>d</sub>/√[m²(ω<sub>d</sub>²−ω₀²)² + b²ω<sub>d</sub>²/m²]</div><div class="d">Amplitude (Driven)</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.14: Wave Motion</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(14.1)</span><div class="f">v = λ/T = λf</div><div class="d">Wave Speed</div></div>
+            <div class="fb"><span class="fn">(14.2)</span><div class="f">k = 2π / λ</div><div class="d">Wave Number</div></div>
+            <div class="fb"><span class="fn">(14.3)</span><div class="f">y(x,t) = A cos(kx ± ωt)</div><div class="d">Sinusoidal Wave</div></div>
+            <div class="fb"><span class="fn">(14.4)</span><div class="f">v = ω / k</div><div class="d">Wave Speed (from k & ω)</div></div>
+            <div class="fb"><span class="fn">(14.5)</span><div class="f">∂²y/∂x² = (1/v²)∂²y/∂t²</div><div class="d">Wave Equation (1D)</div></div>
+            <div class="fb"><span class="fn">(14.6)</span><div class="f">v = √(F/μ)</div><div class="d">Wave Speed (String)</div></div>
+            <div class="fb"><span class="fn">(14.7)</span><div class="f">P̄ = ½μω²A²v</div><div class="d">Avg Power (Wave on String)</div></div>
+            <div class="fb"><span class="fn">(14.8)</span><div class="f">I = P/(4πr²)</div><div class="d">Intensity (Spherical Wave)</div></div>
+            <div class="fb"><span class="fn">(14.9)</span><div class="f">v = √(γp/ρ)</div><div class="d">Sound Speed (Gas)</div></div>
+            <div class="fb"><span class="fn">(14.10)</span><div class="f">β = 10 log(I/I₀)</div><div class="d">Sound Level (Decibels)</div></div>
+            <div class="fb"><span class="fn">(14.11)</span><div class="f">v = √(λg/2π)</div><div class="d">Deep Water Wave Speed</div></div>
+            <div class="fb"><span class="fn">(14.12)</span><div class="f">y(x,t) = 2A sin(kx) sin(ωt)</div><div class="d">Standing Wave</div></div>
+            <div class="fb"><span class="fn">(14.13)</span><div class="f">L = mλ/2, m=1,2,3,...</div><div class="d">Standing Wave (clamped ends)</div></div>
+            <div class="fb"><span class="fn">(14.15)</span><div class="f">f' = f/(1 ∓ u/v)</div><div class="d">Doppler (Moving Source) +receding, −approaching</div></div>
+            <div class="fb"><span class="fn">(14.16)</span><div class="f">f' = f(1 ± u/v)</div><div class="d">Doppler (Moving Observer) +approaching, −receding</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.15: Fluid Motion</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(15.1)</span><div class="f">p = F / A</div><div class="d">Pressure</div></div>
+            <div class="fb"><span class="fn">(15.2)</span><div class="f">dp/dh = ρg</div><div class="d">Hydrostatic Equilibrium</div></div>
+            <div class="fb"><span class="fn">(15.3)</span><div class="f">p = p₀ + ρgh</div><div class="d">Pressure (Liquid)</div></div>
+            <div class="fb"><span class="fn">(15.4)</span><div class="f">ρvA = constant</div><div class="d">Continuity Eq. (Any Fluid)</div></div>
+            <div class="fb"><span class="fn">(15.5)</span><div class="f">vA = constant</div><div class="d">Continuity Eq. (Liquid)</div></div>
+            <div class="fb"><span class="fn">(15.6)</span><div class="f">p + ½ρv² + ρgy = constant</div><div class="d">Bernoulli's Equation</div></div>
+        </div></div></div>
+
+        <div style="background:var(--accent);color:var(--bg);padding:8px 16px;margin:20px 0 10px;font-weight:700;font-size:14px;border-radius:4px;text-align:center">PART THREE: THERMODYNAMICS</div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.16: Temperature & Heat</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(16.1)</span><div class="f">T<sub>C</sub> = T − 273.15</div><div class="d">Celsius & Kelvin</div></div>
+            <div class="fb"><span class="fn">(16.2)</span><div class="f">T<sub>F</sub> = (9/5)T<sub>C</sub> + 32</div><div class="d">Fahrenheit & Celsius</div></div>
+            <div class="fb"><span class="fn">(16.3)</span><div class="f">Q = mcΔT</div><div class="d">Heat & Temp. Change</div></div>
+            <div class="fb"><span class="fn">(16.4)</span><div class="f">m₁c₁ΔT₁ + m₂c₂ΔT₂ = 0</div><div class="d">Thermal Equilibrium (2 objects)</div></div>
+            <div class="fb"><span class="fn">(16.5)</span><div class="f">H = −kA(ΔT/Δx)</div><div class="d">Conductive Heat Flow</div></div>
+            <div class="fb"><span class="fn">(16.6)</span><div class="f">R = Δx/(kA)</div><div class="d">Thermal Resistance</div></div>
+            <div class="fb"><span class="fn">(16.7)</span><div class="f">H = (T₁−T₃)/(R₁+R₂)</div><div class="d">Heat Flow (Composite Slab)</div></div>
+            <div class="fb"><span class="fn">(16.8)</span><div class="f">ℛ = RA = Δx/k</div><div class="d">R-factor</div></div>
+            <div class="fb"><span class="fn">(16.9)</span><div class="f">P = eσAT⁴</div><div class="d">Stefan-Boltzmann Law</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.17: Thermal Behavior of Matter</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(17.1)</span><div class="f">pV = NkT</div><div class="d">Ideal-Gas Law (molecules)</div></div>
+            <div class="fb"><span class="fn">(17.2)</span><div class="f">pV = nRT</div><div class="d">Ideal-Gas Law (moles)</div></div>
+            <div class="fb"><span class="fn">(17.3)</span><div class="f">½mv² = (3/2)kT</div><div class="d">Temp. & Avg Molecular KE</div></div>
+            <div class="fb"><span class="fn">(17.4)</span><div class="f">v<sub>th</sub> = √(3kT/m)</div><div class="d">Thermal Speed</div></div>
+            <div class="fb"><span class="fn">(17.5)</span><div class="f">Q = Lm</div><div class="d">Heat of Transformation</div></div>
+            <div class="fb"><span class="fn">(17.6)</span><div class="f">β = (ΔV/V)/ΔT</div><div class="d">Coeff. Volume Expansion</div></div>
+            <div class="fb"><span class="fn">(17.7)</span><div class="f">α = (ΔL/L)/ΔT</div><div class="d">Coeff. Linear Expansion</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.18: Heat, Work, First Law</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(18.1)</span><div class="f">ΔE<sub>int</sub> = Q + W</div><div class="d">First Law of Thermodynamics</div></div>
+            <div class="fb"><span class="fn">(18.2)</span><div class="f">dE<sub>int</sub>/dt = dQ/dt + dW/dt</div><div class="d">First Law (Rate Form)</div></div>
+            <div class="fb"><span class="fn">(18.3)</span><div class="f">W = −∫ p dV</div><div class="d">Work on Gas (Vol. Change)</div></div>
+            <div class="fb"><span class="fn">(18.4)</span><div class="f">Q = −W = nRT ln(V₂/V₁)</div><div class="d">Heat (Isothermal)</div></div>
+            <div class="fb"><span class="fn">(18.5)</span><div class="f">Q = nC<sub>V</sub>ΔT</div><div class="d">Heat (Const. Volume)</div></div>
+            <div class="fb"><span class="fn">(18.6)</span><div class="f">ΔE<sub>int</sub> = nC<sub>V</sub>ΔT</div><div class="d">Internal Energy Change (Any Ideal-Gas)</div></div>
+            <div class="fb"><span class="fn">(18.8)</span><div class="f">nC<sub>p</sub>ΔT = nC<sub>V</sub>ΔT + pΔV</div><div class="d">Heat (Isobaric)</div></div>
+            <div class="fb"><span class="fn">(18.9)</span><div class="f">C<sub>p</sub> = C<sub>V</sub> + R</div><div class="d">Relation (Molar Specific Heats)</div></div>
+            <div class="fb"><span class="fn">(18.10)</span><div class="f">ΔE<sub>int</sub> = W</div><div class="d">First Law (Adiabatic)</div></div>
+            <div class="fb"><span class="fn">(18.11a)</span><div class="f">pV<sup>γ</sup> = constant</div><div class="d">Adiabatic (p & V)</div></div>
+            <div class="fb"><span class="fn">(18.11b)</span><div class="f">TV<sup>γ−1</sup> = constant</div><div class="d">Adiabatic (T & V)</div></div>
+            <div class="fb"><span class="fn">(18.12)</span><div class="f">W = (p₂V₂−p₁V₁)/(γ−1)</div><div class="d">Work (Adiabatic)</div></div>
+            <div class="fb"><span class="fn">(18.13)</span><div class="f">C<sub>V</sub> = (3/2)R</div><div class="d">Molar Sp. Heat (Monatomic Ideal Gas)</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.19: Second Law of Thermodynamics</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(19.1)</span><div class="f">e = W/Q<sub>h</sub> = 1 − Q<sub>c</sub>/Q<sub>h</sub></div><div class="d">Efficiency (Heat Engine)</div></div>
+            <div class="fb"><span class="fn">(19.3)</span><div class="f">e<sub>Carnot</sub> = 1 − T<sub>c</sub>/T<sub>h</sub></div><div class="d">Carnot Engine Efficiency</div></div>
+            <div class="fb"><span class="fn">(19.4a)</span><div class="f">COP<sub>refrigerator</sub> = T<sub>c</sub>/(T<sub>h</sub>−T<sub>c</sub>)</div><div class="d">COP (Refrigerator)</div></div>
+            <div class="fb"><span class="fn">(19.4b)</span><div class="f">COP<sub>heat pump</sub> = T<sub>h</sub>/(T<sub>h</sub>−T<sub>c</sub>)</div><div class="d">COP (Heat Pump)</div></div>
+            <div class="fb"><span class="fn">(19.5)</span><div class="f">∮ dQ/T = 0</div><div class="d">Entropy Change (Reversible Cycle)</div></div>
+            <div class="fb"><span class="fn">(19.6)</span><div class="f">ΔS₁₂ = ∫ dQ/T</div><div class="d">Entropy Change (Two States)</div></div>
+        </div></div></div>
+
+        <div style="background:var(--accent);color:var(--bg);padding:8px 16px;margin:20px 0 10px;font-weight:700;font-size:14px;border-radius:4px;text-align:center">PART FOUR: ELECTROMAGNETISM</div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.20: Electric Charge, Force, Field</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(20.1)</span><div class="f">F₁₂ = kq₁q₂/r² r̂</div><div class="d">Coulomb's Law</div></div>
+            <div class="fb"><span class="fn">(20.2a)</span><div class="f"><b>E</b> = <b>F</b>/q</div><div class="d">Electric Field</div></div>
+            <div class="fb"><span class="fn">(20.2b)</span><div class="f"><b>F</b> = q<b>E</b></div><div class="d">Electric Force and Field</div></div>
+            <div class="fb"><span class="fn">(20.3)</span><div class="f"><b>E</b> = kq/r² r̂</div><div class="d">Field of Point Charge</div></div>
+            <div class="fb"><span class="fn">(20.4)</span><div class="f"><b>E</b> = Σ<b>E</b><sub>i</sub> = Σkq<sub>i</sub>/r<sub>i</sub>² r̂<sub>i</sub></div><div class="d">Superposition Principle</div></div>
+            <div class="fb"><span class="fn">(20.5)</span><div class="f">p = qd</div><div class="d">Dipole Moment</div></div>
+            <div class="fb"><span class="fn">(20.6a)</span><div class="f"><b>E</b> ≈ −kp/|y|³ î</div><div class="d">Dipole Field (perp. bisector, |y|≫a)</div></div>
+            <div class="fb"><span class="fn">(20.6b)</span><div class="f"><b>E</b> = 2kp/|x|³ î</div><div class="d">Dipole Field (on axis, |x|≫a)</div></div>
+            <div class="fb"><span class="fn">(20.7)</span><div class="f"><b>E</b> = ∫d<b>E</b> = ∫k dq/r² r̂</div><div class="d">Continuous Charge Distribution</div></div>
+            <div class="fb"><span class="fn">(20.8)</span><div class="f"><b>a</b> = (q/m)<b>E</b></div><div class="d">Acceleration in E-field</div></div>
+            <div class="fb"><span class="fn">(20.9)</span><div class="f"><b>τ</b> = <b>p</b> × <b>E</b></div><div class="d">Torque on Dipole</div></div>
+            <div class="fb"><span class="fn">(20.10)</span><div class="f">U = −<b>p</b> · <b>E</b></div><div class="d">PE of Dipole</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.21: Gauss's Law</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(21.1)</span><div class="f">Φ = <b>E</b> · <b>A</b></div><div class="d">Electric Flux (uniform, flat)</div></div>
+            <div class="fb"><span class="fn">(21.2)</span><div class="f">Φ = ∫<sub>surface</sub> <b>E</b> · d<b>A</b></div><div class="d">Electric Flux (general)</div></div>
+            <div class="fb"><span class="fn">(21.3)</span><div class="f">∮ <b>E</b> · d<b>A</b> = q<sub>enclosed</sub>/ε₀</div><div class="d">Gauss's Law</div></div>
+            <div class="fb"><span class="fn">(21.4)</span><div class="f">E = Q/(4πε₀r²)</div><div class="d">Field Outside Spherical Charge</div></div>
+            <div class="fb"><span class="fn">(21.5)</span><div class="f">E = Qr/(4πε₀R³)</div><div class="d">Field Inside Uniform Sphere</div></div>
+            <div class="fb"><span class="fn">(21.6)</span><div class="f">E = λ/(2πε₀r)</div><div class="d">Field of Line Charge</div></div>
+            <div class="fb"><span class="fn">(21.7)</span><div class="f">E = σ/(2ε₀)</div><div class="d">Field of Charged Sheet</div></div>
+            <div class="fb"><span class="fn">(21.8)</span><div class="f">E = σ/ε₀</div><div class="d">Field at Conductor Surface</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.22: Electric Potential</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(22.1a)</span><div class="f">ΔV<sub>AB</sub> = ΔU<sub>AB</sub>/q = −∫<sub>A</sub><sup>B</sup> <b>E</b> · d<b>r</b></div><div class="d">Electric Potential Difference</div></div>
+            <div class="fb"><span class="fn">(22.1b)</span><div class="f">ΔV<sub>AB</sub> = −<b>E</b> · Δ<b>r</b></div><div class="d">Potential Diff. (uniform field)</div></div>
+            <div class="fb"><span class="fn">(22.2)</span><div class="f">ΔV<sub>AB</sub> = kq(1/r<sub>B</sub> − 1/r<sub>A</sub>)</div><div class="d">Potential Diff. (point charge)</div></div>
+            <div class="fb"><span class="fn">(22.3)</span><div class="f">V(r) = kq/r</div><div class="d">Point-Charge Potential (V=0 at ∞)</div></div>
+            <div class="fb"><span class="fn">(22.4)</span><div class="f">ΔV<sub>AB</sub> = [λ/(2πε₀)]ln(r<sub>A</sub>/r<sub>B</sub>)</div><div class="d">Potential Diff. (line charge)</div></div>
+            <div class="fb"><span class="fn">(22.5)</span><div class="f">V(P) = Σkq<sub>i</sub>/r<sub>i</sub></div><div class="d">Potential (discrete charges)</div></div>
+            <div class="fb"><span class="fn">(22.6)</span><div class="f">V(r,θ) = kp cosθ/r²</div><div class="d">Dipole Potential (r≫a)</div></div>
+            <div class="fb"><span class="fn">(22.7)</span><div class="f">V = ∫dV = ∫k dq/r</div><div class="d">Potential (continuous)</div></div>
+            <div class="fb"><span class="fn">(22.8)</span><div class="f">V(x) = kQ/√(x²+a²)</div><div class="d">Potential of Charged Ring (axis)</div></div>
+            <div class="fb"><span class="fn">(22.9)</span><div class="f"><b>E</b> = −(∂V/∂x î + ∂V/∂y ĵ + ∂V/∂z k̂)</div><div class="d">Field from Potential</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.23: Electrostatic Energy & Capacitors</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(23.1)</span><div class="f">C = Q/V</div><div class="d">Capacitance</div></div>
+            <div class="fb"><span class="fn">(23.2)</span><div class="f">C = ε₀A/d</div><div class="d">Parallel-Plate Capacitor</div></div>
+            <div class="fb"><span class="fn">(23.3)</span><div class="f">U = ½CV²</div><div class="d">Energy in Capacitor</div></div>
+            <div class="fb"><span class="fn">(23.4)</span><div class="f">C = κε₀A/d</div><div class="d">Parallel-Plate (w/ dielectric)</div></div>
+            <div class="fb"><span class="fn">(23.5)</span><div class="f">C = C₁ + C₂ + C₃ + ...</div><div class="d">Parallel Capacitors</div></div>
+            <div class="fb"><span class="fn">(23.6a)</span><div class="f">1/C = 1/C₁ + 1/C₂ + 1/C₃ + ...</div><div class="d">Series Capacitors</div></div>
+            <div class="fb"><span class="fn">(23.6b)</span><div class="f">C = C₁C₂/(C₁+C₂)</div><div class="d">Two Series Capacitors</div></div>
+            <div class="fb"><span class="fn">(23.7)</span><div class="f">u<sub>E</sub> = ½ε₀E²</div><div class="d">Electric Energy Density</div></div>
+            <div class="fb"><span class="fn">(23.8)</span><div class="f">U = ∫½ε₀E² dV</div><div class="d">Total Electric Energy</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.24: Electric Current</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(24.1a)</span><div class="f">I = ΔQ/Δt</div><div class="d">Steady Current</div></div>
+            <div class="fb"><span class="fn">(24.1b)</span><div class="f">I = dQ/dt</div><div class="d">Instantaneous Current</div></div>
+            <div class="fb"><span class="fn">(24.2)</span><div class="f">I = nAqv<sub>d</sub></div><div class="d">Microscopic View of Current</div></div>
+            <div class="fb"><span class="fn">(24.3)</span><div class="f"><b>J</b> = nq<b>v</b><sub>d</sub></div><div class="d">Current Density</div></div>
+            <div class="fb"><span class="fn">(24.4a)</span><div class="f"><b>J</b> = σ<b>E</b></div><div class="d">Ohm's Law (microscopic, conductivity)</div></div>
+            <div class="fb"><span class="fn">(24.4b)</span><div class="f"><b>J</b> = <b>E</b>/ρ</div><div class="d">Ohm's Law (microscopic, resistivity)</div></div>
+            <div class="fb"><span class="fn">(24.5)</span><div class="f">I = V/R</div><div class="d">Ohm's Law (macroscopic)</div></div>
+            <div class="fb"><span class="fn">(24.6)</span><div class="f">R = ρL/A</div><div class="d">Resistance</div></div>
+            <div class="fb"><span class="fn">(24.7)</span><div class="f">P = IV</div><div class="d">Electric Power</div></div>
+            <div class="fb"><span class="fn">(24.8a)</span><div class="f">P = I²R</div><div class="d">Power Dissipated (Resistor)</div></div>
+            <div class="fb"><span class="fn">(24.8b)</span><div class="f">P = V²/R</div><div class="d">Power Dissipated (Resistor)</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.25: Electric Circuits</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(25.1)</span><div class="f">R<sub>series</sub> = R₁ + R₂ + R₃ + ...</div><div class="d">Series Resistors</div></div>
+            <div class="fb"><span class="fn">(25.2a,b)</span><div class="f">V₁ = [R₁/(R₁+R₂)]E ; V₂ = [R₂/(R₁+R₂)]E</div><div class="d">Voltage Divider</div></div>
+            <div class="fb"><span class="fn">(25.3a)</span><div class="f">1/R<sub>parallel</sub> = 1/R₁ + 1/R₂ + 1/R₃ + ...</div><div class="d">Parallel Resistors</div></div>
+            <div class="fb"><span class="fn">(25.3b)</span><div class="f">R<sub>parallel</sub> = R₁R₂/(R₁+R₂)</div><div class="d">Two Parallel Resistors</div></div>
+            <div class="fb"><span class="fn">(25.4)</span><div class="f">dI/dt = −I/RC</div><div class="d">RC Circuit Diff. Eq.</div></div>
+            <div class="fb"><span class="fn">(25.5)</span><div class="f">I = (E/R)e<sup>−t/RC</sup></div><div class="d">Current (Charging RC)</div></div>
+            <div class="fb"><span class="fn">(25.6)</span><div class="f">V<sub>C</sub> = E(1 − e<sup>−t/RC</sup>)</div><div class="d">Capacitor Voltage (Charging)</div></div>
+            <div class="fb"><span class="fn">(25.7)</span><div class="f">I = (V₀/R)e<sup>−t/RC</sup></div><div class="d">Current (Discharging RC)</div></div>
+            <div class="fb"><span class="fn">(25.8)</span><div class="f">V = V₀e<sup>−t/RC</sup></div><div class="d">Capacitor Voltage (Discharging)</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.26: Magnetism: Force & Field</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(26.1)</span><div class="f"><b>F</b><sub>B</sub> = q<b>v</b> × <b>B</b></div><div class="d">Magnetic Force</div></div>
+            <div class="fb"><span class="fn">(26.2)</span><div class="f"><b>F</b> = q<b>E</b> + q<b>v</b> × <b>B</b></div><div class="d">Lorentz Force</div></div>
+            <div class="fb"><span class="fn">(26.3)</span><div class="f">r = mv/(qB)</div><div class="d">Radius (Charged Particle in B)</div></div>
+            <div class="fb"><span class="fn">(26.4)</span><div class="f">f = qB/(2πm)</div><div class="d">Cyclotron Frequency</div></div>
+            <div class="fb"><span class="fn">(26.5)</span><div class="f"><b>F</b> = I<b>l</b> × <b>B</b></div><div class="d">Magnetic Force on Current</div></div>
+            <div class="fb"><span class="fn">(26.6)</span><div class="f">V<sub>H</sub> = IB/(nqt)</div><div class="d">Hall Potential</div></div>
+            <div class="fb"><span class="fn">(26.7)</span><div class="f">d<b>B</b> = (μ₀/4π)(Id<b>l</b> × r̂)/r²</div><div class="d">Biot-Savart Law</div></div>
+            <div class="fb"><span class="fn">(26.8)</span><div class="f"><b>B</b> = ∫d<b>B</b> = (μ₀/4π)∫(Id<b>l</b> × r̂)/r²</div><div class="d">Biot-Savart Law (integrated)</div></div>
+            <div class="fb"><span class="fn">(26.9)</span><div class="f">B = μ₀Ia²/[2(x²+a²)<sup>3/2</sup>]</div><div class="d">Field of Current Loop (axis)</div></div>
+            <div class="fb"><span class="fn">(26.10)</span><div class="f">B = μ₀I/(2πy)</div><div class="d">Field of Long Straight Wire</div></div>
+            <div class="fb"><span class="fn">(26.11)</span><div class="f">F = μ₀I₁I₂l/(2πd)</div><div class="d">Magnetic Force Between Wires</div></div>
+            <div class="fb"><span class="fn">(26.12)</span><div class="f">B = (μ₀/2π)(μ/x³)</div><div class="d">On-Axis Field (Magnetic Dipole)</div></div>
+            <div class="fb"><span class="fn">(26.13)</span><div class="f"><b>μ</b> = NI<b>A</b></div><div class="d">Magnetic Dipole Moment (N-turn)</div></div>
+            <div class="fb"><span class="fn">(26.14)</span><div class="f">∮ <b>B</b> · d<b>A</b> = 0</div><div class="d">Gauss's Law for Magnetism</div></div>
+            <div class="fb"><span class="fn">(26.15)</span><div class="f"><b>τ</b> = <b>μ</b> × <b>B</b></div><div class="d">Torque on Magnetic Dipole</div></div>
+            <div class="fb"><span class="fn">(26.16)</span><div class="f">U = −<b>μ</b> · <b>B</b></div><div class="d">PE of Magnetic Dipole</div></div>
+            <div class="fb"><span class="fn">(26.17)</span><div class="f">∮ <b>B</b> · d<b>l</b> = μ₀I<sub>encircled</sub></div><div class="d">Ampère's Law (steady currents)</div></div>
+            <div class="fb"><span class="fn">(26.18)</span><div class="f">B = μ₀I/(2πr)</div><div class="d">Field Outside (Line Symmetry)</div></div>
+            <div class="fb"><span class="fn">(26.19)</span><div class="f">B = μ₀Ir/(2πR²)</div><div class="d">Field Inside (Line Symmetry)</div></div>
+            <div class="fb"><span class="fn">(26.20)</span><div class="f">B = ½μ₀J<sub>s</sub></div><div class="d">Field of Infinite Current Sheet</div></div>
+            <div class="fb"><span class="fn">(26.21)</span><div class="f">B = μ₀nI</div><div class="d">Solenoid Field</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.27: Electromagnetic Induction</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(27.1a)</span><div class="f">Φ<sub>B</sub> = ∫<b>B</b> · d<b>A</b></div><div class="d">Magnetic Flux</div></div>
+            <div class="fb"><span class="fn">(27.1b)</span><div class="f">Φ<sub>B</sub> = <b>B</b> · <b>A</b> = BA cosθ</div><div class="d">Magnetic Flux (uniform, flat)</div></div>
+            <div class="fb"><span class="fn">(27.2)</span><div class="f">ℰ = −dΦ<sub>B</sub>/dt</div><div class="d">Faraday's Law (emf)</div></div>
+            <div class="fb"><span class="fn">(27.3)</span><div class="f">L = Φ<sub>B</sub>/I</div><div class="d">Self-Inductance</div></div>
+            <div class="fb"><span class="fn">(27.4)</span><div class="f">L = μ₀n²Al</div><div class="d">Inductance of Solenoid</div></div>
+            <div class="fb"><span class="fn">(27.5)</span><div class="f">ℰ<sub>L</sub> = −LdI/dt</div><div class="d">Inductor EMF</div></div>
+            <div class="fb"><span class="fn">(27.6)</span><div class="f">ℰ<sub>L</sub> = −ℰ₀e<sup>−Rt/L</sup></div><div class="d">Inductor EMF (RL buildup)</div></div>
+            <div class="fb"><span class="fn">(27.7)</span><div class="f">I = (ℰ₀/R)(1 − e<sup>−Rt/L</sup>)</div><div class="d">Current (RL buildup)</div></div>
+            <div class="fb"><span class="fn">(27.8)</span><div class="f">I = I₀e<sup>−Rt/L</sup></div><div class="d">Current (RL decay)</div></div>
+            <div class="fb"><span class="fn">(27.9)</span><div class="f">U = ½LI²</div><div class="d">Energy in Inductor</div></div>
+            <div class="fb"><span class="fn">(27.10)</span><div class="f">u<sub>B</sub> = B²/(2μ₀)</div><div class="d">Magnetic Energy Density</div></div>
+            <div class="fb"><span class="fn">(27.11)</span><div class="f">∮ <b>E</b> · d<b>l</b> = −dΦ<sub>B</sub>/dt</div><div class="d">Faraday's Law (induced E-field)</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.28: Alternating-Current Circuits</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(28.1)</span><div class="f">V<sub>rms</sub> = V<sub>p</sub>/√2 ; I<sub>rms</sub> = I<sub>p</sub>/√2</div><div class="d">RMS and Peak Values</div></div>
+            <div class="fb"><span class="fn">(28.2)</span><div class="f">ω = 2πf</div><div class="d">Angular Frequency</div></div>
+            <div class="fb"><span class="fn">(28.3)</span><div class="f">V = V<sub>p</sub> sin(ωt+φ<sub>V</sub>) ; I = I<sub>p</sub> sin(ωt+φ<sub>I</sub>)</div><div class="d">AC Voltage and Current</div></div>
+            <div class="fb"><span class="fn">(28.4)</span><div class="f">I = ωCV<sub>p</sub> cos(ωt) = ωCV<sub>p</sub> sin(ωt+π/2)</div><div class="d">Current in Capacitor (AC)</div></div>
+            <div class="fb"><span class="fn">(28.5)</span><div class="f">I<sub>p</sub> = V<sub>p</sub>/(1/ωC) = V<sub>p</sub>/X<sub>C</sub></div><div class="d">Peak Current (Capacitive Reactance)</div></div>
+            <div class="fb"><span class="fn">(28.6)</span><div class="f">I = −V<sub>p</sub>/(ωL) cos(ωt) = V<sub>p</sub>/(ωL) sin(ωt−π/2)</div><div class="d">Current in Inductor (AC)</div></div>
+            <div class="fb"><span class="fn">(28.7)</span><div class="f">I<sub>p</sub> = V<sub>p</sub>/(ωL) = V<sub>p</sub>/X<sub>L</sub></div><div class="d">Peak Current (Inductive Reactance)</div></div>
+            <div class="fb"><span class="fn">(28.8)</span><div class="f">Ld²q/dt² + q/C = 0</div><div class="d">Diff. Eq. for LC Circuit</div></div>
+            <div class="fb"><span class="fn">(28.9)</span><div class="f">q = q<sub>p</sub> cos(ωt)</div><div class="d">Charge in LC Circuit</div></div>
+            <div class="fb"><span class="fn">(28.10)</span><div class="f">ω = 1/√(LC)</div><div class="d">LC Oscillation Frequency</div></div>
+            <div class="fb"><span class="fn">(28.11)</span><div class="f">q(t) = q<sub>p</sub>e<sup>−Rt/2L</sup> cos(ωt)</div><div class="d">Charge (Damped RLC)</div></div>
+            <div class="fb"><span class="fn">(28.12)</span><div class="f">I<sub>p</sub> = V<sub>p</sub>/√[R²+(X<sub>L</sub>−X<sub>C</sub>)²] = V<sub>p</sub>/Z</div><div class="d">Peak Current (Driven RLC, Impedance)</div></div>
+            <div class="fb"><span class="fn">(28.13)</span><div class="f">tan φ = (X<sub>L</sub>−X<sub>C</sub>)/R = [ωL−1/(ωC)]/R</div><div class="d">Phase Angle (Driven RLC)</div></div>
+            <div class="fb"><span class="fn">(28.14)</span><div class="f">⟨P⟩ = I<sub>rms</sub>V<sub>rms</sub> cosφ</div><div class="d">Average Power (AC)</div></div>
+            <div class="fb"><span class="fn">(28.15)</span><div class="f">V₂ = (N₂/N₁)V₁</div><div class="d">Transformer Equation</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.29: Maxwell's Equations & EM Waves</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(29.1)</span><div class="f">∮ <b>B</b> · d<b>l</b> = μ₀I + μ₀ε₀dΦ<sub>E</sub>/dt</div><div class="d">Ampère's Law (Maxwell's mod.)</div></div>
+            <div class="fb"><span class="fn">(29.2-5)</span><div class="f">∮ <b>E</b>·d<b>A</b>=q/ε₀ ; ∮ <b>B</b>·d<b>A</b>=0 ; ∮ <b>E</b>·d<b>l</b>=−dΦ<sub>B</sub>/dt ; ∮ <b>B</b>·d<b>l</b>=μ₀I+μ₀ε₀dΦ<sub>E</sub>/dt</div><div class="d">Maxwell's Equations</div></div>
+            <div class="fb"><span class="fn">(29.10)</span><div class="f"><b>E</b>(x,t) = E<sub>p</sub> sin(kx−ωt) ĵ</div><div class="d">E-field (Plane EM Wave)</div></div>
+            <div class="fb"><span class="fn">(29.11)</span><div class="f"><b>B</b>(x,t) = B<sub>p</sub> sin(kx−ωt) k̂</div><div class="d">B-field (Plane EM Wave)</div></div>
+            <div class="fb"><span class="fn">(29.12)</span><div class="f">∂E/∂x = −∂B/∂t</div><div class="d">Faraday's Law (EM Wave)</div></div>
+            <div class="fb"><span class="fn">(29.13)</span><div class="f">∂B/∂x = −ε₀μ₀∂E/∂t</div><div class="d">Ampère's Law (EM Wave)</div></div>
+            <div class="fb"><span class="fn">(29.14,15)</span><div class="f">kE<sub>p</sub> = ωB<sub>p</sub> ; kB<sub>p</sub> = ε₀μ₀ωE<sub>p</sub></div><div class="d">Conditions on Wave Fields</div></div>
+            <div class="fb"><span class="fn">(29.16a)</span><div class="f">wave speed = ω/k = 1/√(ε₀μ₀)</div><div class="d">EM Wave Speed (Vacuum)</div></div>
+            <div class="fb"><span class="fn">(29.16b)</span><div class="f">ω/k = c</div><div class="d">EM Wave Speed = c</div></div>
+            <div class="fb"><span class="fn">(29.16c)</span><div class="f">fλ = c</div><div class="d">Frequency, Wavelength, c</div></div>
+            <div class="fb"><span class="fn">(29.17)</span><div class="f">E = cB</div><div class="d">E and B Relation (Vacuum EM)</div></div>
+            <div class="fb"><span class="fn">(29.18)</span><div class="f">S = S₀ cos²θ</div><div class="d">Law of Malus (Polarization)</div></div>
+            <div class="fb"><span class="fn">(29.19a)</span><div class="f">S = EB/μ₀</div><div class="d">Wave Intensity (magnitude)</div></div>
+            <div class="fb"><span class="fn">(29.19b)</span><div class="f"><b>S</b> = (<b>E</b> × <b>B</b>)/μ₀</div><div class="d">Poynting Vector</div></div>
+            <div class="fb"><span class="fn">(29.20a)</span><div class="f">S̄ = E<sub>p</sub>B<sub>p</sub>/(2μ₀)</div><div class="d">Average Intensity</div></div>
+            <div class="fb"><span class="fn">(29.20b,c)</span><div class="f">S̄ = E<sub>p</sub>²/(2μ₀c) ; S̄ = cB<sub>p</sub>²/(2μ₀)</div><div class="d">Avg Intensity (E or B)</div></div>
+            <div class="fb"><span class="fn">(29.21)</span><div class="f">S = P/(4πr²)</div><div class="d">Intensity (Localized Source)</div></div>
+            <div class="fb"><span class="fn">(29.22)</span><div class="f">P<sub>rad</sub> = S̄/c</div><div class="d">Radiation Pressure (absorption)</div></div>
+        </div></div></div>
+
+        <div style="background:var(--accent);color:var(--bg);padding:8px 16px;margin:20px 0 10px;font-weight:700;font-size:14px;border-radius:4px;text-align:center">PART FIVE: OPTICS</div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.30: Reflection & Refraction</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(30.1)</span><div class="f">θ'₁ = θ₁</div><div class="d">Law of Reflection</div></div>
+            <div class="fb"><span class="fn">(30.2)</span><div class="f">n = c/v</div><div class="d">Index of Refraction</div></div>
+            <div class="fb"><span class="fn">(30.3)</span><div class="f">n₁ sinθ₁ = n₂ sinθ₂</div><div class="d">Snell's Law</div></div>
+            <div class="fb"><span class="fn">(30.4)</span><div class="f">tan θ<sub>p</sub> = n₂/n₁</div><div class="d">Brewster's Angle</div></div>
+            <div class="fb"><span class="fn">(30.5)</span><div class="f">sin θ<sub>c</sub> = n₂/n₁</div><div class="d">Critical Angle</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.31: Images & Optical Instruments</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(31.1)</span><div class="f">M = h'/h = −s'/s</div><div class="d">Magnification (Mirrors)</div></div>
+            <div class="fb"><span class="fn">(31.2)</span><div class="f">1/s + 1/s' = 1/f</div><div class="d">Mirror Equation</div></div>
+            <div class="fb"><span class="fn">(31.3)</span><div class="f">|f| = R/2</div><div class="d">Focal Length & Radius</div></div>
+            <div class="fb"><span class="fn">(31.4)</span><div class="f">M = h'/h = −s'/s</div><div class="d">Magnification (Lenses)</div></div>
+            <div class="fb"><span class="fn">(31.5)</span><div class="f">1/s + 1/s' = 1/f</div><div class="d">Lens Equation</div></div>
+            <div class="fb"><span class="fn">(31.6)</span><div class="f">n₁/s + n₂/s' = (n₂−n₁)/R</div><div class="d">Refraction (Curved Surface)</div></div>
+            <div class="fb"><span class="fn">(31.7)</span><div class="f">1/f = (n−1)(1/R₁ − 1/R₂)</div><div class="d">Lensmaker's Formula</div></div>
+            <div class="fb"><span class="fn">(31.8)</span><div class="f">m = 25 cm/f</div><div class="d">Angular Mag. (Simple Magnifier)</div></div>
+            <div class="fb"><span class="fn">(31.9)</span><div class="f">M = M<sub>o</sub>m<sub>e</sub> = −(L/f<sub>o</sub>)(25 cm/f<sub>e</sub>)</div><div class="d">Mag. (Compound Microscope)</div></div>
+            <div class="fb"><span class="fn">(31.10)</span><div class="f">m = β/α = f<sub>o</sub>/f<sub>e</sub></div><div class="d">Angular Mag. (Telescope)</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.32: Interference & Diffraction</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(32.1a)</span><div class="f">d sinθ = mλ (m=0,±1,±2,...)</div><div class="d">Bright Fringes (Double-Slit)</div></div>
+            <div class="fb"><span class="fn">(32.1b)</span><div class="f">d sinθ = (m+½)λ (m=0,±1,±2,...)</div><div class="d">Dark Fringes (Double-Slit)</div></div>
+            <div class="fb"><span class="fn">(32.2a,b)</span><div class="f">y<sub>bright</sub> = mλL/d ; y<sub>dark</sub> = (m+½)λL/d</div><div class="d">Fringe Position (λ≪d)</div></div>
+            <div class="fb"><span class="fn">(32.3)</span><div class="f">S̄ = 4S̄₀ cos²(πd/λL)y</div><div class="d">Intensity (Double-Slit)</div></div>
+            <div class="fb"><span class="fn">(32.4)</span><div class="f">d sinθ = (m/N)λ</div><div class="d">Destructive (N-Slit)</div></div>
+            <div class="fb"><span class="fn">(32.5)</span><div class="f">λ/Δλ = mN</div><div class="d">Resolving Power (Grating)</div></div>
+            <div class="fb"><span class="fn">(32.6)</span><div class="f">2d sinθ = mλ (m=1,2,3,...)</div><div class="d">Bragg Condition (X-Ray)</div></div>
+            <div class="fb"><span class="fn">(32.7)</span><div class="f">2nd = (m+½)λ</div><div class="d">Constructive (Thin Film)</div></div>
+            <div class="fb"><span class="fn">(32.8)</span><div class="f">a sinθ = mλ (m=±1,±2,±3,...)</div><div class="d">Destructive (Single-Slit)</div></div>
+            <div class="fb"><span class="fn">(32.9)</span><div class="f">φ = (2π/λ)a sinθ</div><div class="d">Phase Diff. (Single-Slit)</div></div>
+            <div class="fb"><span class="fn">(32.10)</span><div class="f">S̄ = S̄₀[sin(φ/2)/(φ/2)]²</div><div class="d">Intensity (Single-Slit)</div></div>
+            <div class="fb"><span class="fn">(32.11a)</span><div class="f">θ<sub>min</sub> = λ/a</div><div class="d">Rayleigh Criterion (Slit)</div></div>
+            <div class="fb"><span class="fn">(32.11b)</span><div class="f">θ<sub>min</sub> = 1.22λ/D</div><div class="d">Rayleigh Criterion (Circular)</div></div>
+        </div></div></div>
+
+        <div style="background:var(--accent);color:var(--bg);padding:8px 16px;margin:20px 0 10px;font-weight:700;font-size:14px;border-radius:4px;text-align:center">PART SIX: MODERN PHYSICS</div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.33: Relativity</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(33.1,2)</span><div class="f">t<sub>⊥</sub> = 2L/√(c²−v²) ; t<sub>∥</sub> = 2cL/(c²−v²)</div><div class="d">Michelson-Morley Times</div></div>
+            <div class="fb"><span class="fn">(33.3)</span><div class="f">Δt = Δt'/√(1−v²/c²)</div><div class="d">Time Dilation</div></div>
+            <div class="fb"><span class="fn">(33.4)</span><div class="f">Δx' = Δx√(1−v²/c²)</div><div class="d">Length Contraction</div></div>
+            <div class="fb"><span class="fn">(33.5a,b)</span><div class="f">u = (u'+v)/(1+u'v/c²) ; u' = (u−v)/(1−uv/c²)</div><div class="d">Relativistic Velocity Addition</div></div>
+            <div class="fb"><span class="fn">(33.6)</span><div class="f">(Δs)² = (cΔt)² − [(Δx)²+(Δy)²+(Δz)²]</div><div class="d">Spacetime Interval</div></div>
+            <div class="fb"><span class="fn">(33.7)</span><div class="f"><b>p</b> = m<b>u</b>/√(1−u²/c²) = γm<b>u</b></div><div class="d">Relativistic Momentum</div></div>
+            <div class="fb"><span class="fn">(33.8)</span><div class="f">K = γmc² − mc²</div><div class="d">Relativistic KE</div></div>
+            <div class="fb"><span class="fn">(33.9)</span><div class="f">E = γmc² = mc²/√(1−u²/c²)</div><div class="d">Total Energy</div></div>
+            <div class="fb"><span class="fn">(33.10)</span><div class="f">E² = (pc)² + (mc²)²</div><div class="d">Energy-Momentum Relation</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.34: Particles & Waves</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(34.1)</span><div class="f">P<sub>blackbody</sub> = σAT⁴</div><div class="d">Stefan-Boltzmann Law</div></div>
+            <div class="fb"><span class="fn">(34.2a)</span><div class="f">λ<sub>peak</sub>T = 2.898 mm·K</div><div class="d">Wien's Law</div></div>
+            <div class="fb"><span class="fn">(34.2b)</span><div class="f">λ<sub>median</sub>T = 4.11 mm·K</div><div class="d">Median Wavelength</div></div>
+            <div class="fb"><span class="fn">(34.3)</span><div class="f">R(λ,T) = 2πhc²/[λ⁵(e<sup>hc/λkT</sup>−1)]</div><div class="d">Planck's Law</div></div>
+            <div class="fb"><span class="fn">(34.4)</span><div class="f">E = nhf (n=0,1,2,3,...)</div><div class="d">Quantization (Planck)</div></div>
+            <div class="fb"><span class="fn">(34.5)</span><div class="f">R(λ,T) = 2πckT/λ⁴</div><div class="d">Rayleigh-Jeans Law</div></div>
+            <div class="fb"><span class="fn">(34.6)</span><div class="f">E = hf</div><div class="d">Photon Energy</div></div>
+            <div class="fb"><span class="fn">(34.7)</span><div class="f">K<sub>max</sub> = hf − φ</div><div class="d">Photoelectric Effect</div></div>
+            <div class="fb"><span class="fn">(34.8)</span><div class="f">Δλ = (h/mc)(1−cosθ)</div><div class="d">Compton Shift</div></div>
+            <div class="fb"><span class="fn">(34.9)</span><div class="f">1/λ = R<sub>H</sub>(1/n₂² − 1/n₁²)</div><div class="d">Balmer-Rydberg Formula</div></div>
+            <div class="fb"><span class="fn">(34.10)</span><div class="f">mvr = nℏ</div><div class="d">Angular Momentum Quant. (Bohr)</div></div>
+            <div class="fb"><span class="fn">(34.11)</span><div class="f">r = −ke²/(2E)</div><div class="d">Radius (Bohr Orbit from E)</div></div>
+            <div class="fb"><span class="fn">(34.12a)</span><div class="f">E<sub>n</sub> = −ke²/(2a₀n²)</div><div class="d">Energy Levels (Bohr)</div></div>
+            <div class="fb"><span class="fn">(34.12b)</span><div class="f">E<sub>n</sub> = −13.6 eV/n²</div><div class="d">Energy Levels (Bohr, numerical)</div></div>
+            <div class="fb"><span class="fn">(34.13)</span><div class="f">r = n²a₀</div><div class="d">Radii (Bohr Orbits)</div></div>
+            <div class="fb"><span class="fn">(34.14)</span><div class="f">λ = h/p</div><div class="d">De Broglie Wavelength</div></div>
+            <div class="fb"><span class="fn">(34.15)</span><div class="f">Δx Δp ≥ ℏ</div><div class="d">Uncertainty (Position-Momentum)</div></div>
+            <div class="fb"><span class="fn">(34.16)</span><div class="f">ΔE Δt ≥ ℏ</div><div class="d">Uncertainty (Energy-Time)</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.35: Quantum Mechanics</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(35.1)</span><div class="f">−ℏ²/(2m)d²ψ/dx² + Uψ = Eψ</div><div class="d">Schrödinger Eq. (1D)</div></div>
+            <div class="fb"><span class="fn">(35.2)</span><div class="f">P(x) = |ψ(x)|² dx</div><div class="d">Probability & Wave Function</div></div>
+            <div class="fb"><span class="fn">(35.3)</span><div class="f">∫<sub>−∞</sub><sup>+∞</sup> |ψ|² dx = 1</div><div class="d">Normalization</div></div>
+            <div class="fb"><span class="fn">(35.4)</span><div class="f">−ℏ²/(2m)d²ψ/dx² = Eψ</div><div class="d">Schrödinger (Infinite Square Well)</div></div>
+            <div class="fb"><span class="fn">(35.5)</span><div class="f">E<sub>n</sub> = n²π²ℏ²/(2mL²) = n²h²/(8mL²)</div><div class="d">Energy Levels (Infinite Well)</div></div>
+            <div class="fb"><span class="fn">(35.6)</span><div class="f">ψ<sub>n</sub> = √(2/L)sin(nπx/L)</div><div class="d">Wave Function (Infinite Well)</div></div>
+            <div class="fb"><span class="fn">(35.7)</span><div class="f">E<sub>n</sub> = (n+½)ℏω</div><div class="d">Energy Levels (Harmonic Osc.)</div></div>
+            <div class="fb"><span class="fn">(35.8)</span><div class="f">E = h²/(8mL²)(n<sub>x</sub>²+n<sub>y</sub>²+n<sub>z</sub>²)</div><div class="d">Energy Levels (Cubical Box)</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.36: Atomic Physics</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(36.1)</span><div class="f">U(r) = −ke²/r</div><div class="d">PE (Hydrogen Atom)</div></div>
+            <div class="fb"><span class="fn">(36.6)</span><div class="f">E<sub>n</sub> = −ℏ²/(2ma₀²n²) = E₁/n² = −13.6 eV/n²</div><div class="d">Hydrogen Energy Levels</div></div>
+            <div class="fb"><span class="fn">(36.8)</span><div class="f">E<sub>n</sub> = −Z²ℏ²/(2ma₀²n²) = Z²E₁/n² = −13.6 eV·Z²/n²</div><div class="d">One-Electron Atom (Z)</div></div>
+            <div class="fb"><span class="fn">(36.9)</span><div class="f">L = √[l(l+1)]ℏ</div><div class="d">Orbital Angular Momentum Quant.</div></div>
+            <div class="fb"><span class="fn">(36.10)</span><div class="f">L<sub>z</sub> = m<sub>l</sub>ℏ</div><div class="d">Space Quantization</div></div>
+            <div class="fb"><span class="fn">(36.11)</span><div class="f">S = √[s(s+1)]ℏ</div><div class="d">Spin Angular Momentum Quant.</div></div>
+            <div class="fb"><span class="fn">(36.12)</span><div class="f">S<sub>z</sub> = m<sub>s</sub>ℏ</div><div class="d">z-component of Spin</div></div>
+            <div class="fb"><span class="fn">(36.13)</span><div class="f"><b>μ</b><sub>S</sub> = −(e/m)<b>S</b></div><div class="d">Magnetic Moment of Electron</div></div>
+            <div class="fb"><span class="fn">(36.14)</span><div class="f">μ<sub>z</sub> = ∓eℏ/(2m)</div><div class="d">z-component of Mag. Moment</div></div>
+            <div class="fb"><span class="fn">(36.15)</span><div class="f"><b>J</b> = <b>L</b> + <b>S</b></div><div class="d">Total Angular Momentum</div></div>
+            <div class="fb"><span class="fn">(36.16)</span><div class="f">J = √[j(j+1)]ℏ</div><div class="d">Total Angular Momentum Quant.</div></div>
+            <div class="fb"><span class="fn">(36.18)</span><div class="f">J<sub>z</sub> = m<sub>j</sub>ℏ</div><div class="d">z-component Total Angular Mom.</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.37: Molecules & Solids</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(37.1)</span><div class="f">L = √[l(l+1)]ℏ</div><div class="d">Quantized Rotational Angular Mom.</div></div>
+            <div class="fb"><span class="fn">(37.2)</span><div class="f">E<sub>rot</sub> = ℏ²/(2I)l(l+1) (l=0,1,2,3,...)</div><div class="d">Quantized Rotational Energy</div></div>
+            <div class="fb"><span class="fn">(37.3)</span><div class="f">E<sub>vib</sub> = (n+½)ℏω (n=0,1,2,3,...)</div><div class="d">Quantized Vibrational Energy</div></div>
+            <div class="fb"><span class="fn">(37.4)</span><div class="f">U = −αke²/r₀[r₀/r − (1/n)(r₀/r)<sup>n</sup>]</div><div class="d">PE of Ion in Crystal</div></div>
+            <div class="fb"><span class="fn">(37.5)</span><div class="f">g(E) = (2<sup>7/2</sup>πm<sup>3/2</sup>/h³)√E</div><div class="d">Density of States</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.38: Nuclear Physics</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(38.1)</span><div class="f">R = R₀A<sup>1/3</sup></div><div class="d">Nuclear Radius</div></div>
+            <div class="fb"><span class="fn">(38.2)</span><div class="f">I = √[i(i+1)]ℏ</div><div class="d">Nuclear Spin Angular Momentum</div></div>
+            <div class="fb"><span class="fn">(38.3a)</span><div class="f">N = N₀e<sup>−λt</sup></div><div class="d">Radioactive Decay (Exponential)</div></div>
+            <div class="fb"><span class="fn">(38.3b)</span><div class="f">N = N₀2<sup>−t/t<sub>1/2</sub></sup></div><div class="d">Radioactive Decay (Half-Life)</div></div>
+            <div class="fb"><span class="fn">(38.7)</span><div class="f">m<sub>N</sub>c² + E<sub>b</sub> = Zm<sub>p</sub>c² + (A−Z)m<sub>n</sub>c²</div><div class="d">Binding Energy</div></div>
+            <div class="fb"><span class="fn">(38.11)</span><div class="f">nτ > 10²² s/m³ (D-D) ; nτ > 10²⁰ s/m³ (D-T)</div><div class="d">Lawson Criterion</div></div>
+        </div></div></div>
+
+        <div class="ch"><div class="chh" onclick="this.parentElement.classList.toggle('a')"><h2>Ch.39: From Quarks to the Cosmos</h2><span class="t">+</span></div><div class="chc"><div class="chb">
+            <div class="fb"><span class="fn">(39.1)</span><div class="f">v = H₀d</div><div class="d">Hubble's Law</div></div>
+            <div class="fb"><span class="fn">(39.2)</span><div class="f">ρ<sub>c</sub> = 3H₀²/(8πG)</div><div class="d">Critical Density</div></div>
+        </div></div></div>
+
+    </div></div>
+<script>
+    let si=document.getElementById('si'),ss=document.getElementById('ss');
+    si.addEventListener('input',function(){let q=this.value.toLowerCase().trim(),cnt=document.querySelectorAll('.fb'),m=0;cnt.forEach(e=>{e.classList.remove('hl');if(q&&e.textContent.toLowerCase().includes(q)){e.classList.add('hl');m++;let ch=e.closest('.ch');if(ch)ch.classList.add('a')}});ss.textContent=q?m+' matches':''});
+
+    function setTheme(theme){
+        document.body.className=theme;
+        document.querySelectorAll('.theme-btn').forEach(btn=>{
+            btn.classList.remove('active');
+        });
+        event.target.classList.add('active');
+        localStorage.setItem('physics-theme',theme);
+    }
+
+    // Load saved theme
+    window.addEventListener('DOMContentLoaded',()=>{
+        const saved=localStorage.getItem('physics-theme');
+        if(saved){
+            document.body.className=saved;
+            document.querySelectorAll('.theme-btn').forEach(btn=>{
+                if((saved===''&&btn.textContent==='Earthy')||(btn.onclick.toString().includes(`'${saved}'`))){
+                    btn.classList.add('active');
+                    document.querySelectorAll('.theme-btn').forEach(b=>b.classList.remove('active'));
+                    btn.classList.add('active');
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>
